@@ -241,8 +241,8 @@ public class Nmea extends CordovaPlugin {
               if(_nmea.contains("GNGLL")) {
                 nmea = _nmea;
                 if(nmeaGllObj.getNmea() != _nmea) {
-                    nmeaGLLObj.setTimestamp(t);
-                    nmeaGLLObj.setNmea(_nmea);
+                    nmeaGllObj.setTimestamp(t);
+                    nmeaGllObj.setNmea(_nmea);
                 }
               }
 
