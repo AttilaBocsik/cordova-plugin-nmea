@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="cordova-plugin-nmea" version="1.0.0"
+    xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <name>Nmea</name>
+    <description>Cordova Geolocation Plugin</description>
+    <js-module name="Nmea" src="www/Nmea.js">
+        <clobbers target="Nmea" />
+    </js-module>
+
+    <platform name="android">
+        <config-file parent="/*" target="res/xml/config.xml">
+            <feature name="Nmea">
+                <param name="android-package" value="cordova.plugin.nmea.Nmea" />
+            </feature>
+        </config-file>
+        <config-file  parent="/*" target="AndroidManifest.xml">
+            <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+            <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+            <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+            <uses-feature android:name="android.hardware.location.gps" />
+        </config-file>
+        <source-file src="src/android/Nmea.java" target-dir="src/cordova/plugin/nmea/Nmea" />
+        <source-file src="src/android/model/NmeaGgaModel.java" target-dir="src/cordova/plugin/nmea/Nmea/model" />
+        <source-file src="src/android/model/NmeaGllModel.java" target-dir="src/cordova/plugin/nmea/Nmea/model" />
+        <source-file src="src/android/model/NmeaGrsModel.java" target-dir="src/cordova/plugin/nmea/Nmea/model" />
+        <source-file src="src/android/model/NmeaGsaModel.java" target-dir="src/cordova/plugin/nmea/Nmea/model" />
+        <source-file src="src/android/model/NmeaGstModel.java" target-dir="src/cordova/plugin/nmea/Nmea/model" />
+        <source-file src="src/android/model/NmeaGsvModel.java" target-dir="src/cordova/plugin/nmea/Nmea/model" />
+        <source-file src="src/android/model/NmeaRmcModel.java" target-dir="src/cordova/plugin/nmea/Nmea/model" />
+        <source-file src="src/android/model/NmeaZdaModel.java" target-dir="src/cordova/plugin/nmea/Nmea/model" />
+    </platform>
+
+</plugin>
