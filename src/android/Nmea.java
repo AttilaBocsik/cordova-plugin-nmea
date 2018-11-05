@@ -230,7 +230,7 @@ public class Nmea extends CordovaPlugin {
           @Override
           public void onNmeaReceived(long t, String _nmea) {
               LOG.d("NIK", _nmea);
-              if(_nmea.contains("GPGGA")) {
+              if(_nmea.contains("$GNGGA")) {
                 nmea = _nmea;
                 if(nmeaGgaObj.getNmea() != _nmea) {
                     nmeaGgaObj.setTimestamp(t);
@@ -238,7 +238,7 @@ public class Nmea extends CordovaPlugin {
                 }
               }
 
-              if(_nmea.contains("GPGLL")) {
+              if(_nmea.contains("$GNGLL")) {
                 nmea = _nmea;
                 if(nmeaGllObj.getNmea() != _nmea) {
                     nmeaGllObj.setTimestamp(t);
@@ -246,7 +246,7 @@ public class Nmea extends CordovaPlugin {
                 }
               }
 
-              if(_nmea.contains("GPGRS")) {
+              if(_nmea.contains("$GNGRS")) {
                 nmea = _nmea;
                 if(nmeaGrsObj.getNmea() != _nmea) {
                     nmeaGrsObj.setTimestamp(t);
@@ -254,7 +254,7 @@ public class Nmea extends CordovaPlugin {
                 }
               }
 
-              if(_nmea.contains("GPGSA")) {
+              if(_nmea.contains("$GNGSA")) {
                 nmea = _nmea;
                 if(nmeaGsaObj.getNmea() != _nmea) {
                     nmeaGsaObj.setTimestamp(t);
@@ -262,7 +262,7 @@ public class Nmea extends CordovaPlugin {
                 }
               }
 
-              if(_nmea.contains("GPGST")) {
+              if(_nmea.contains("$GNGST")) {
                 nmea = _nmea;
                 if(nmeaGstObj.getNmea() != _nmea) {
                     nmeaGstObj.setTimestamp(t);
@@ -270,7 +270,7 @@ public class Nmea extends CordovaPlugin {
                 }
               }
 
-              if(_nmea.contains("GPGSV")) {
+              if(_nmea.contains("$GNGSV")) {
                 nmea = _nmea;
                 if(nmeaGsvObj.getNmea() != _nmea) {
                     nmeaGsvObj.setTimestamp(t);
@@ -278,7 +278,7 @@ public class Nmea extends CordovaPlugin {
                 }
               }
 
-              if(_nmea.contains("GPRMC")) {
+              if(_nmea.contains("$GNRMC")) {
                 nmea = _nmea;
                 if(nmeaRmcObj.getNmea() != _nmea) {
                     nmeaRmcObj.setTimestamp(t);
@@ -286,7 +286,7 @@ public class Nmea extends CordovaPlugin {
                 }
               }
 
-              if(_nmea.contains("GPZDA")) {
+              if(_nmea.contains("$GNZDA")) {
                 nmea = _nmea;
                 if(nmeaZdaObj.getNmea() != _nmea) {
                     nmeaZdaObj.setTimestamp(t);
