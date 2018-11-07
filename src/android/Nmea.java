@@ -35,7 +35,7 @@ public class Nmea extends CordovaPlugin {
     private LocationManager locationManager = null;
     private LocationListener locationListener = null;
     private NmeaListener nmeaListnereInstance = null;
-    private NmeaZdaModel nmeaAllObj = new NmeaAllModel(0,"");
+    private NmeaAllModel nmeaAllObj = new NmeaAllModel(0,"");
     private NmeaGgaModel nmeaGgaObj = new NmeaGgaModel(0,"");
     private NmeaGllModel nmeaGllObj = new NmeaGllModel(0,"");
     private NmeaGrsModel nmeaGrsObj = new NmeaGrsModel(0,"");
