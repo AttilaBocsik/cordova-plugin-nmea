@@ -10,6 +10,9 @@ module.exports = {
     stopNmea: function (arg0, success, error) {
         exec(success, error, 'Nmea', 'stopNmea', [arg0]);
     },
+    getNmeaAll: function (arg0, success, error) {
+        exec(success, error, 'Nmea', 'getNmeaAll', [arg0]);
+    },
     getNmeaGga: function (arg0, success, error) {
         exec(success, error, 'Nmea', 'getNmeaGga', [arg0]);
     },

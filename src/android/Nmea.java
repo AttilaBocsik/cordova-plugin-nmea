@@ -35,6 +35,7 @@ public class Nmea extends CordovaPlugin {
     private LocationManager locationManager = null;
     private LocationListener locationListener = null;
     private NmeaListener nmeaListnereInstance = null;
+    private NmeaZdaModel nmeaAllObj = new NmeaAllModel(0,"");
     private NmeaGgaModel nmeaGgaObj = new NmeaGgaModel(0,"");
     private NmeaGllModel nmeaGllObj = new NmeaGllModel(0,"");
     private NmeaGrsModel nmeaGrsObj = new NmeaGrsModel(0,"");
@@ -89,6 +90,18 @@ public class Nmea extends CordovaPlugin {
             callbackContext.success("Stop Nmea Observer");
             return true;
         } 
+
+        /**
+         * Get NMEA-1083 ALL string
+         */
+        if(action.equals("getNmeaAll")) {
+            if (this.nmeaStarted == true) {
+                callbackContext.success(nmeaAllObj.getNmea());
+            } else {
+                callbackContext.success("");
+            }
+            return true;
+        }
 
         /**
          * Get NMEA-1083 GNGGA string
@@ -229,7 +242,13 @@ public class Nmea extends CordovaPlugin {
       nmeaListnereInstance = new NmeaListener() {
           @Override
           public void onNmeaReceived(long t, String _nmea) {
-              LOG.d("NIK", _nmea);
+              LOG.d("raw NMEA", _nmea);
+
+              if(nmeaAllObj.getNmea() != _nmea) {
+                nmeaAllObj.setTimestamp(t);
+                nmeaAllObj.setNmea(_nmea);
+              }
+
               if(_nmea.contains("GNGGA")) {
                 nmea = _nmea;
                 if(nmeaGgaObj.getNmea() != _nmea) {
@@ -309,6 +328,8 @@ public class Nmea extends CordovaPlugin {
         }
         nmeaStarted = false;
         nmea = "nincs";
+        nmeaAllObj.setTimestamp(0);
+        nmeaAllObj.setNmea("");
         nmeaGgaObj.setTimestamp(0);
         nmeaGgaObj.setNmea("");
         nmeaGllObj.setTimestamp(0);

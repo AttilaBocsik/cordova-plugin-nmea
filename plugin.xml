@@ -22,6 +22,7 @@
             <uses-feature android:name="android.hardware.location.gps" />
         </config-file>
         <source-file src="src/android/Nmea.java" target-dir="src/cordova/plugin/nmea/Nmea" />
+        <source-file src="src/android/model/NmeaAllModel.java" target-dir="src/cordova/plugin/nmea/Nmea/model" />
         <source-file src="src/android/model/NmeaGgaModel.java" target-dir="src/cordova/plugin/nmea/Nmea/model" />
         <source-file src="src/android/model/NmeaGllModel.java" target-dir="src/cordova/plugin/nmea/Nmea/model" />
         <source-file src="src/android/model/NmeaGrsModel.java" target-dir="src/cordova/plugin/nmea/Nmea/model" />
