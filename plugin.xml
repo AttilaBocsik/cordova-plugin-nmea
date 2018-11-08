@@ -31,6 +31,7 @@
         <source-file src="src/android/model/NmeaGsvModel.java" target-dir="src/cordova/plugin/nmea/Nmea/model" />
         <source-file src="src/android/model/NmeaRmcModel.java" target-dir="src/cordova/plugin/nmea/Nmea/model" />
         <source-file src="src/android/model/NmeaZdaModel.java" target-dir="src/cordova/plugin/nmea/Nmea/model" />
+        <source-file src="src/android/model/NmeaVtgModel.java" target-dir="src/cordova/plugin/nmea/Nmea/model" />
     </platform>
 
 </plugin>

@@ -36,6 +36,9 @@ module.exports = {
     },
     getNmeaZda: function (arg0, success, error) {
         exec(success, error, 'Nmea', 'getNmeaZda', [arg0]);
+    },
+    getNmeaVtg: function (arg0, success, error) {
+        exec(success, error, 'Nmea', 'getNmeaVtg', [arg0]);
     }
     
 }
