@@ -37,12 +37,13 @@ public class Nmea extends CordovaPlugin {
     private NmeaListener nmeaListnereInstance = null;
 
     private OnNmeaMessageListener onNmeaMessageListeneInstance = null;
+    private NmeaGgaModel nmeaGgaObj = new NmeaGgaModel(0, "");
     private NmeaGsaModel nmeaGsaObj = new NmeaGsaModel(0, "");
     private NmeaGsvModel nmeaGsvObj = new NmeaGsvModel(0, "");
     private NmeaRmcModel nmeaRmcObj = new NmeaRmcModel(0, "");
     /*
     private NmeaAllModel nmeaAllObj = new NmeaAllModel(0, "");
-    private NmeaGgaModel nmeaGgaObj = new NmeaGgaModel(0, "");
+    
     private NmeaGllModel nmeaGllObj = new NmeaGllModel(0, "");
     private NmeaGrsModel nmeaGrsObj = new NmeaGrsModel(0, "");
     
@@ -111,7 +112,7 @@ public class Nmea extends CordovaPlugin {
 
         /**
          * Get NMEA-1083 GNGGA string
-         *
+         */
         if (action.equals("getNmeaGga")) {
             if (this.nmeaStarted == true) {
                 callbackContext.success(nmeaGgaObj.getNmea());
@@ -119,7 +120,7 @@ public class Nmea extends CordovaPlugin {
                 callbackContext.success("");
             }
             return true;
-        }*/
+        }
 
         /**
          * Get NMEA-1083 GNGLL string
@@ -183,7 +184,7 @@ public class Nmea extends CordovaPlugin {
 
         /**
          * Get NMEA-1083 GNRMC string
-         *
+         */
         if (action.equals("getNmeaRmc")) {
             if (this.nmeaStarted == true) {
                 callbackContext.success(nmeaRmcObj.getNmea());
@@ -191,7 +192,7 @@ public class Nmea extends CordovaPlugin {
                 callbackContext.success("");
             }
             return true;
-        }*/
+        }
 
         /**
          * Get NMEA-1083 GNZDA string
@@ -263,6 +264,14 @@ public class Nmea extends CordovaPlugin {
                 if (message.contains("GP")) {
                     if (nmea != message) {
                         nmea = message;
+                    }
+                }
+
+                if (message.contains("GPGGA")) {
+                    nmea = message;
+                    if (nmeaGgaObj.getNmea() != message) {
+                        nmeaGgaObj.setTimestamp(timestamp);
+                        nmeaGgaObj.setNmea(message);
                     }
                 }
 
@@ -392,13 +401,7 @@ public class Nmea extends CordovaPlugin {
                     nmeaAllObj.setNmea(message);
                 }
 
-                if (message.contains("GNGGA")) {
-                    nmea = message;
-                    if (nmeaGgaObj.getNmea() != message) {
-                        nmeaGgaObj.setTimestamp(timestamp);
-                        nmeaGgaObj.setNmea(message);
-                    }
-                }
+                
 
                 if (message.contains("GNGLL")) {
                     nmea = message;
