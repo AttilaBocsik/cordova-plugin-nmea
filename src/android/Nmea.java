@@ -41,6 +41,7 @@ public class Nmea extends CordovaPlugin {
     private NmeaGsaModel nmeaGsaObj = new NmeaGsaModel(0, "");
     private NmeaGsvModel nmeaGsvObj = new NmeaGsvModel(0, "");
     private NmeaRmcModel nmeaRmcObj = new NmeaRmcModel(0, "");
+    private NmeaVtgModel nmeaVtgObj = new NmeaVtgModel(0, "");
     /*
     private NmeaAllModel nmeaAllObj = new NmeaAllModel(0, "");
     
@@ -51,7 +52,7 @@ public class Nmea extends CordovaPlugin {
     
     
     private NmeaZdaModel nmeaZdaObj = new NmeaZdaModel(0, "");
-    private NmeaVtgModel nmeaVtgObj = new NmeaVtgModel(0, "");
+    
     */
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
@@ -291,11 +292,19 @@ public class Nmea extends CordovaPlugin {
                     }
                 }
 
-                if (message.contains("GNRMC")) {
+                if (message.contains("GPRMC")) {
                     nmea = message;
                     if (nmeaRmcObj.getNmea() != message) {
                         nmeaRmcObj.setTimestamp(timestamp);
                         nmeaRmcObj.setNmea(message);
+                    }
+                }
+
+                if (message.contains("GPVTG")) {
+                    nmea = message;
+                    if (nmeaVtgObj.getNmea() != message) {
+                        nmeaVtgObj.setTimestamp(timestamp);
+                        nmeaVtgObj.setNmea(message);
                     }
                 }
             }
@@ -447,13 +456,7 @@ public class Nmea extends CordovaPlugin {
                     }
                 }
 
-                if (message.contains("GNVTG")) {
-                    nmea = message;
-                    if (nmeaVtgObj.getNmea() != message) {
-                        nmeaVtgObj.setTimestamp(timestamp);
-                        nmeaVtgObj.setNmea(message);
-                    }
-                }
+                
             }
 
         };*/
@@ -479,6 +482,8 @@ public class Nmea extends CordovaPlugin {
         nmeaGsvObj.setNmea("");
         nmeaRmcObj.setTimestamp(0);
         nmeaRmcObj.setNmea("");
+        nmeaVtgObj.setTimestamp(0);
+        nmeaVtgObj.setNmea("");
         /*
         nmeaAllObj.setTimestamp(0);
         nmeaAllObj.setNmea("");
@@ -495,8 +500,7 @@ public class Nmea extends CordovaPlugin {
         
         nmeaZdaObj.setTimestamp(0);
         nmeaZdaObj.setNmea("");
-        nmeaVtgObj.setTimestamp(0);
-        nmeaVtgObj.setNmea("");
+        
         */
     }
 
