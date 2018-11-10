@@ -266,10 +266,10 @@ public class Nmea extends CordovaPlugin {
                     }
                 }
 
-                if (_nmea.contains("GPGSA")) {
+                if (message.contains("GPGSA")) {
                     nmea = message;
                     if (nmeaGsaObj.getNmea() != message) {
-                        nmeaGsaObj.setTimestamp(t);
+                        nmeaGsaObj.setTimestamp(timestamp);
                         nmeaGsaObj.setNmea(message);
                     }
                 }
