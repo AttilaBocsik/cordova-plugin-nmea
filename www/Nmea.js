@@ -10,9 +10,9 @@ module.exports = {
     stopNmea: function (arg0, success, error) {
         exec(success, error, 'Nmea', 'stopNmea', [arg0]);
     },
-    getNmeaAll: function (arg0, success, error) {
-        exec(success, error, 'Nmea', 'getNmeaAll', [arg0]);
-    },
+    getNmea: function (arg0, success, error) {
+        exec(success, error, 'Nmea', 'getNmea', [arg0]);
+    }/*,
     getNmeaGga: function (arg0, success, error) {
         exec(success, error, 'Nmea', 'getNmeaGga', [arg0]);
     },
@@ -39,6 +39,6 @@ module.exports = {
     },
     getNmeaVtg: function (arg0, success, error) {
         exec(success, error, 'Nmea', 'getNmeaVtg', [arg0]);
-    }
+    }*/
     
 }
