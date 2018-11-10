@@ -251,10 +251,13 @@ public class Nmea extends CordovaPlugin {
             }
 
         };
-
+        /*
         nmeaListnereInstance = new NmeaListener()  {
             @Override
-            public void onNmeaReceived(long timestamp, String message) {
+            public void onNmeaReceived(long timestamp, String message) {*/
+        vonNmeaMessageListeneInstance = new OnNmeaMessageListener() {
+            @Override
+            public void onNmeaMessage(String message, long timestamp) {
                 /*
                 if (message.contains("GP")) {
                     if (nmea != message) {
@@ -366,16 +369,16 @@ public class Nmea extends CordovaPlugin {
         // proba resz vege
         long time = 2000;
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, time, 0.0f, locationListener);
-        locationManager.addNmeaListener(nmeaListnereInstance);
-        //locationManager.addNmeaListener(onNmeaMessageListeneInstance);
+        //locationManager.addNmeaListener(nmeaListnereInstance);
+        locationManager.addNmeaListener(onNmeaMessageListeneInstance);
         nmeaStarted = true;
     }
 
     public void nmeaStop() {
         if (locationManager != null) {
             locationManager.removeUpdates(locationListener);
-            locationManager.removeNmeaListener(nmeaListnereInstance);
-            //locationManager.removeNmeaListener(onNmeaMessageListeneInstance);
+            //locationManager.removeNmeaListener(nmeaListnereInstance);
+            locationManager.removeNmeaListener(onNmeaMessageListeneInstance);
         }
         nmeaStarted = false;
         nmea = "";
