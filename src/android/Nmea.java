@@ -37,6 +37,7 @@ public class Nmea extends CordovaPlugin {
     private NmeaListener nmeaListnereInstance = null;
 
     private OnNmeaMessageListener onNmeaMessageListeneInstance = null;
+    private NmeaGsvModel nmeaGsvObj = new NmeaGsvModel(0, "");
     /*
     private NmeaAllModel nmeaAllObj = new NmeaAllModel(0, "");
     private NmeaGgaModel nmeaGgaObj = new NmeaGgaModel(0, "");
@@ -44,7 +45,7 @@ public class Nmea extends CordovaPlugin {
     private NmeaGrsModel nmeaGrsObj = new NmeaGrsModel(0, "");
     private NmeaGsaModel nmeaGsaObj = new NmeaGsaModel(0, "");
     private NmeaGstModel nmeaGstObj = new NmeaGstModel(0, "");
-    private NmeaGsvModel nmeaGsvObj = new NmeaGsvModel(0, "");
+    
     private NmeaRmcModel nmeaRmcObj = new NmeaRmcModel(0, "");
     private NmeaZdaModel nmeaZdaObj = new NmeaZdaModel(0, "");
     private NmeaVtgModel nmeaVtgObj = new NmeaVtgModel(0, "");
@@ -166,8 +167,8 @@ public class Nmea extends CordovaPlugin {
         }*/
 
         /**
-         * Get NMEA-1083 GNGSV string
-         *
+         * Get NMEA-1083 GPGSV string
+         */
         if (action.equals("getNmeaGsv")) {
             if (this.nmeaStarted == true) {
                 callbackContext.success(nmeaGsvObj.getNmea());
@@ -175,7 +176,7 @@ public class Nmea extends CordovaPlugin {
                 callbackContext.success("");
             }
             return true;
-        }*/
+        }
 
         /**
          * Get NMEA-1083 GNRMC string
@@ -259,6 +260,14 @@ public class Nmea extends CordovaPlugin {
                 if (message.contains("GP")) {
                     if (nmea != message) {
                         nmea = message;
+                    }
+                }
+
+                if (message.contains("GPGSV")) {
+                    nmea = message;
+                    if (nmeaGsvObj.getNmea() != message) {
+                        nmeaGsvObj.setTimestamp(timestamp);
+                        nmeaGsvObj.setNmea(message);
                     }
                 }
             }
@@ -410,13 +419,7 @@ public class Nmea extends CordovaPlugin {
                     }
                 }
 
-                if (message.contains("PQGSV")) {
-                    nmea = message;
-                    if (nmeaGsvObj.getNmea() != message) {
-                        nmeaGsvObj.setTimestamp(timestamp);
-                        nmeaGsvObj.setNmea(message);
-                    }
-                }
+                
 
                 if (message.contains("GNRMC")) {
                     nmea = message;
@@ -460,6 +463,8 @@ public class Nmea extends CordovaPlugin {
         }
         nmeaStarted = false;
         nmea = "";
+        nmeaGsvObj.setTimestamp(0);
+        nmeaGsvObj.setNmea("");
         /*
         nmeaAllObj.setTimestamp(0);
         nmeaAllObj.setNmea("");
@@ -473,8 +478,7 @@ public class Nmea extends CordovaPlugin {
         nmeaGsaObj.setNmea("");
         nmeaGstObj.setTimestamp(0);
         nmeaGstObj.setNmea("");
-        nmeaGsvObj.setTimestamp(0);
-        nmeaGsvObj.setNmea("");
+        
         nmeaRmcObj.setTimestamp(0);
         nmeaRmcObj.setNmea("");
         nmeaZdaObj.setTimestamp(0);
