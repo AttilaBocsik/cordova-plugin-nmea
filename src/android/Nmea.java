@@ -256,7 +256,7 @@ public class Nmea extends CordovaPlugin {
         onNmeaMessageListeneInstance = new OnNmeaMessageListener() {
             @Override
             public void onNmeaMessage(String message, long timestamp) {
-                if (message.contains("GP")) {
+                if (message.contains("$")) {
                     if (nmea != message) {
                         nmea = message;
                     }
@@ -434,7 +434,7 @@ public class Nmea extends CordovaPlugin {
 
         };*/
         // proba resz vege
-        long time = 1000;
+        long time = 2000;
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, time, 0.0f, locationListener);
         //locationManager.addNmeaListener(nmeaListnereInstance);
 
