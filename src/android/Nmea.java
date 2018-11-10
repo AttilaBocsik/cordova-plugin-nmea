@@ -98,7 +98,7 @@ public class Nmea extends CordovaPlugin {
          */
         if (action.equals("getNmea")) {
             if (this.nmeaStarted == true) {
-                callbackContext.success(this.nmea);
+                callbackContext.success(nmea);
             } else {
                 callbackContext.success("");
             }
@@ -256,7 +256,7 @@ public class Nmea extends CordovaPlugin {
         onNmeaMessageListeneInstance = new OnNmeaMessageListener() {
             @Override
             public void onNmeaMessage(String message, long timestamp) {
-                this.nmea = message;
+                nmea = message;
             }
         };
 
@@ -435,7 +435,7 @@ public class Nmea extends CordovaPlugin {
         //locationManager.addNmeaListener(nmeaListnereInstance);
 
         locationManager.addNmeaListener(onNmeaMessageListeneInstance);
-        this.nmeaStarted = true;
+        nmeaStarted = true;
     }
 
     public void nmeaStop() {
@@ -444,8 +444,8 @@ public class Nmea extends CordovaPlugin {
             //locationManager.removeNmeaListener(nmeaListnereInstance);
             locationManager.removeNmeaListener(onNmeaMessageListeneInstance);
         }
-        this.nmeaStarted = false;
-        this.nmea = "nincs";
+        nmeaStarted = false;
+        nmea = "nincs";
         /*
         nmeaAllObj.setTimestamp(0);
         nmeaAllObj.setNmea("");
