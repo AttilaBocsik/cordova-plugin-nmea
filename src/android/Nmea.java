@@ -255,7 +255,7 @@ public class Nmea extends CordovaPlugin {
         nmeaListnereInstance = new NmeaListener()  {
             @Override
             public void onNmeaReceived(long timestamp, String message) {*/
-        vonNmeaMessageListeneInstance = new OnNmeaMessageListener() {
+        onNmeaMessageListeneInstance = new OnNmeaMessageListener() {
             @Override
             public void onNmeaMessage(String message, long timestamp) {
                 /*
