@@ -30,7 +30,7 @@ public class Nmea extends CordovaPlugin {
     String TAG = "GeolocationPlugin";
     CallbackContext context;
     String[] permissions = { Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION };
-    String nmea = "nincs";
+    String nmea = "";
     boolean nmeaStarted = false;
     private LocationManager locationManager = null;
     private LocationListener locationListener = null;
@@ -98,7 +98,7 @@ public class Nmea extends CordovaPlugin {
          */
         if (action.equals("getNmea")) {
             if (this.nmeaStarted == true) {
-                callbackContext.success(nmea);
+                callbackContext.success(nmeaList[2]);
             } else {
                 callbackContext.success("");
             }
@@ -256,7 +256,9 @@ public class Nmea extends CordovaPlugin {
         onNmeaMessageListeneInstance = new OnNmeaMessageListener() {
             @Override
             public void onNmeaMessage(String message, long timestamp) {
-                nmea = message;
+                for (String retval: Str.split("$")) {
+                    nmea.concat("_"+retval);
+                 }
             }
         };
 
