@@ -13,6 +13,11 @@ module.exports = {
     getNmea: function (arg0, success, error) {
         exec(success, error, 'Nmea', 'getNmea', [arg0]);
     },
+
+    getNmeaGsa: function (arg0, success, error) {
+        exec(success, error, 'Nmea', 'getNmeaGsa', [arg0]);
+    },
+    
     getNmeaGsv: function (arg0, success, error) {
         exec(success, error, 'Nmea', 'getNmeaGsv', [arg0]);
     }
@@ -27,9 +32,7 @@ module.exports = {
     getNmeaGrs: function (arg0, success, error) {
         exec(success, error, 'Nmea', 'getNmeaGrs', [arg0]);
     },
-    getNmeaGsa: function (arg0, success, error) {
-        exec(success, error, 'Nmea', 'getNmeaGsa', [arg0]);
-    },
+    
     getNmeaGst: function (arg0, success, error) {
         exec(success, error, 'Nmea', 'getNmeaGst', [arg0]);
     },

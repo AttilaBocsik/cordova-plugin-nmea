@@ -37,13 +37,14 @@ public class Nmea extends CordovaPlugin {
     private NmeaListener nmeaListnereInstance = null;
 
     private OnNmeaMessageListener onNmeaMessageListeneInstance = null;
+    private NmeaGsaModel nmeaGsaObj = new NmeaGsaModel(0, "");
     private NmeaGsvModel nmeaGsvObj = new NmeaGsvModel(0, "");
     /*
     private NmeaAllModel nmeaAllObj = new NmeaAllModel(0, "");
     private NmeaGgaModel nmeaGgaObj = new NmeaGgaModel(0, "");
     private NmeaGllModel nmeaGllObj = new NmeaGllModel(0, "");
     private NmeaGrsModel nmeaGrsObj = new NmeaGrsModel(0, "");
-    private NmeaGsaModel nmeaGsaObj = new NmeaGsaModel(0, "");
+    
     private NmeaGstModel nmeaGstObj = new NmeaGstModel(0, "");
     
     private NmeaRmcModel nmeaRmcObj = new NmeaRmcModel(0, "");
@@ -143,8 +144,8 @@ public class Nmea extends CordovaPlugin {
         }*/
 
         /**
-         * Get NMEA-1083 GNGSA string
-         *
+         * Get NMEA-1083 GPGSA string
+         */
         if (action.equals("getNmeaGsa")) {
             if (this.nmeaStarted == true) {
                 callbackContext.success(nmeaGsaObj.getNmea());
@@ -152,7 +153,7 @@ public class Nmea extends CordovaPlugin {
                 callbackContext.success("");
             }
             return true;
-        }*/
+        }
 
         /**
          * Get NMEA-1083 GNGST string
@@ -463,6 +464,8 @@ public class Nmea extends CordovaPlugin {
         }
         nmeaStarted = false;
         nmea = "";
+        nmeaGsaObj.setTimestamp(0);
+        nmeaGsaObj.setNmea("");
         nmeaGsvObj.setTimestamp(0);
         nmeaGsvObj.setNmea("");
         /*
@@ -474,8 +477,7 @@ public class Nmea extends CordovaPlugin {
         nmeaGllObj.setNmea("");
         nmeaGrsObj.setTimestamp(0);
         nmeaGrsObj.setNmea("");
-        nmeaGsaObj.setTimestamp(0);
-        nmeaGsaObj.setNmea("");
+        
         nmeaGstObj.setTimestamp(0);
         nmeaGstObj.setNmea("");
         
