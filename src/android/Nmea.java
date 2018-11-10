@@ -282,7 +282,7 @@ public class Nmea extends CordovaPlugin {
                     }
                 }
 
-                if (message.contains("GPRMC")) {
+                if (message.contains("GNRMC")) {
                     nmea = message;
                     if (nmeaRmcObj.getNmea() != message) {
                         nmeaRmcObj.setTimestamp(timestamp);
