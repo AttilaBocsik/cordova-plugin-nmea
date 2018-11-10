@@ -256,7 +256,7 @@ public class Nmea extends CordovaPlugin {
         nmeaListnereInstance = new NmeaListener()  {
             @Override
             public void onNmeaReceived(long timestamp, String message) {
-                if (message.contains("GN")) {
+                if (message.contains("GP")) {
                     if (nmea != message) {
                         nmea = message;
                     }
