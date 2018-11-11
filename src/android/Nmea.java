@@ -273,7 +273,7 @@ public class Nmea extends CordovaPlugin {
                     }
                 }
 
-                if (message.contains("GPGLL")) {
+                if (message.contains("$GPGLL")) {
                     nmea = message;
                     if (nmeaGllObj.getNmea() != message) {
                         nmeaGllObj.setTimestamp(timestamp);
@@ -322,7 +322,7 @@ public class Nmea extends CordovaPlugin {
                     }
                 }
 
-                if (message.contains("GPZDA")) {
+                if (message.contains("$GPZDA")) {
                     nmea = message;
                     if (nmeaZdaObj.getNmea() != message) {
                         nmeaZdaObj.setTimestamp(timestamp);
