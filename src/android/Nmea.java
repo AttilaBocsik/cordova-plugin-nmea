@@ -261,10 +261,58 @@ public class Nmea extends CordovaPlugin {
                 try {
                     String[] sArrNMEA = message.split(",");
                     String strNMEAType = sArrNMEA[0];
+                    if (strNMEAType.equals("$GPGGA")) {
+                        if (nmeaGgaObj.getNmea() != message) {
+                            nmeaGgaObj.setTimestamp(timestamp);
+                            nmeaGgaObj.setNmea(message);
+                        }
+                    } 
                     if (strNMEAType.equals("$GPGLL")) {
                         if (nmeaGllObj.getNmea() != message) {
                             nmeaGllObj.setTimestamp(timestamp);
                             nmeaGllObj.setNmea(message);
+                        }
+                    } 
+                    if (strNMEAType.equals("$GPGSA")) {
+                        if (nmeaGsaObj.getNmea() != message) {
+                            nmeaGsaObj.setTimestamp(timestamp);
+                            nmeaGsaObj.setNmea(message);
+                        }
+                    } 
+                    if (strNMEAType.equals("$GPGSV")) {
+                        if (nmeaGsvObj.getNmea() != message) {
+                            nmeaGsvObj.setTimestamp(timestamp);
+                            nmeaGsvObj.setNmea(message);
+                        }
+                    } 
+                    if (strNMEAType.equals("$GPGRS")) {
+                        if (nmeaGrsObj.getNmea() != message) {
+                            nmeaGrsObj.setTimestamp(timestamp);
+                            nmeaGrsObj.setNmea(message);
+                        }
+                    } 
+                    if (strNMEAType.equals("$GPGST")) {
+                        if (nmeaGstObj.getNmea() != message) {
+                            nmeaGstObj.setTimestamp(timestamp);
+                            nmeaGstObj.setNmea(message);
+                        }
+                    } 
+                    if (strNMEAType.equals("$GPRMC")) {
+                        if (nmeaRmcObj.getNmea() != message) {
+                            nmeaRmcObj.setTimestamp(timestamp);
+                            nmeaRmcObj.setNmea(message);
+                        }
+                    } 
+                    if (strNMEAType.equals("$GPZPA")) {
+                        if (nmeaZdaObj.getNmea() != message) {
+                            nmeaZdaObj.setTimestamp(timestamp);
+                            nmeaZdaObj.setNmea(message);
+                        }
+                    } 
+                    if (strNMEAType.equals("$GPVTG")) {
+                        if (nmeaVtgObj.getNmea() != message) {
+                            nmeaVtgObj.setTimestamp(timestamp);
+                            nmeaVtgObj.setNmea(message);
                         }
                     } 
                 } catch (Exception e) {
