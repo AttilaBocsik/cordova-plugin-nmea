@@ -29,13 +29,12 @@ public class Nmea extends CordovaPlugin {
 
     String TAG = "GeolocationPlugin";
     CallbackContext context;
-    String[] permissions = { Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION };
+    String[] permissions = { Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS };
     String nmea = "";
     boolean nmeaStarted = false;
     private LocationManager locationManager = null;
     private LocationListener locationListener = null;
     private NmeaListener nmeaListnereInstance = null;
-
     private OnNmeaMessageListener onNmeaMessageListeneInstance = null;
     private NmeaGgaModel nmeaGgaObj = new NmeaGgaModel(0, "");
     private NmeaGllModel nmeaGllObj = new NmeaGllModel(0, "");
@@ -46,7 +45,7 @@ public class Nmea extends CordovaPlugin {
     private NmeaRmcModel nmeaRmcObj = new NmeaRmcModel(0, "");
     private NmeaVtgModel nmeaVtgObj = new NmeaVtgModel(0, "");
     private NmeaZdaModel nmeaZdaObj = new NmeaZdaModel(0, "");
-    
+
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         LOG.d(TAG, "Belépünk a végrehajtáshoz");
@@ -252,19 +251,28 @@ public class Nmea extends CordovaPlugin {
 
         };
         /*
-        nmeaListnereInstance = new NmeaListener()  {
-            @Override
-            public void onNmeaReceived(long timestamp, String message) {*/
+         * nmeaListnereInstance = new NmeaListener() {
+         * 
+         * @Override public void onNmeaReceived(long timestamp, String message) {
+         */
         onNmeaMessageListeneInstance = new OnNmeaMessageListener() {
             @Override
             public void onNmeaMessage(String message, long timestamp) {
-                /*
-                if (message.contains("GP")) {
-                    if (nmea != message) {
-                        nmea = message;
-                    }
+                try {
+                    String[] sArrNMEA = message.split(",");
+                    String strNMEAType = sArrNMEA[0];
+                    if (strNMEAType.equals("$GPGLL")) {
+                        if (nmeaGllObj.getNmea() != message) {
+                            nmeaGllObj.setTimestamp(timestamp);
+                            nmeaGllObj.setNmea(message);
+                        }
+                    } 
+                } catch (Exception e) {
+        
                 }
-                */
+                /*
+                 * if (message.contains("GP")) { if (nmea != message) { nmea = message; } }
+                 *
                 if (message.contains("GPGGA")) {
                     nmea = message;
                     if (nmeaGgaObj.getNmea() != message) {
@@ -313,7 +321,6 @@ public class Nmea extends CordovaPlugin {
                     }
                 }
 
-
                 if (message.contains("GPRMC")) {
                     nmea = message;
                     if (nmeaRmcObj.getNmea() != message) {
@@ -336,40 +343,13 @@ public class Nmea extends CordovaPlugin {
                         nmeaVtgObj.setTimestamp(timestamp);
                         nmeaVtgObj.setNmea(message);
                     }
-                }
+                }*/
             }
         };
-        /*
-        onNmeaMessageListeneInstance = new OnNmeaMessageListener() {
-            @Override
-            public void onNmeaMessage(String message, long timestamp) {
-                if (message.contains("$")) {
-                    if (nmea != message) {
-                        nmea = message;
-                    }
-                }
-            }
-        };*/
 
-        
-       
-        /*proba resz kezdete
-        onNmeaMessageListeneInstance = new OnNmeaMessageListener() {
-            @Override
-            public void onNmeaMessage(String message, long timestamp) {
-
-                if (nmeaAllObj.getNmea() != message) {
-                    nmeaAllObj.setTimestamp(timestamp);
-                    nmeaAllObj.setNmea(message);
-                }
-  
-            }
-
-        };*/
-        // proba resz vege
-        long time = 2000;
+        long time = 1000;
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, time, 0.0f, locationListener);
-        //locationManager.addNmeaListener(nmeaListnereInstance);
+        // locationManager.addNmeaListener(nmeaListnereInstance);
         locationManager.addNmeaListener(onNmeaMessageListeneInstance);
         nmeaStarted = true;
     }
@@ -377,7 +357,7 @@ public class Nmea extends CordovaPlugin {
     public void nmeaStop() {
         if (locationManager != null) {
             locationManager.removeUpdates(locationListener);
-            //locationManager.removeNmeaListener(nmeaListnereInstance);
+            // locationManager.removeNmeaListener(nmeaListnereInstance);
             locationManager.removeNmeaListener(onNmeaMessageListeneInstance);
         }
         nmeaStarted = false;
