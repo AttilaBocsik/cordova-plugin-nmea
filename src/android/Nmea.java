@@ -335,7 +335,7 @@ public class Nmea extends CordovaPlugin {
             }
         };
 
-        long time = 318;
+        long time = 2000;
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, time, 0.0f, locationListener);
         // locationManager.addNmeaListener(nmeaListnereInstance);
         locationManager.addNmeaListener(onNmeaMessageListeneInstance);
